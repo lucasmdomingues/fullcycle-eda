@@ -1,6 +1,10 @@
 package qm
 
-import ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
+import (
+	"log"
+
+	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
+)
 
 type Consumer struct {
 	ConfigMap *ckafka.ConfigMap
@@ -27,8 +31,11 @@ func (c *Consumer) Consume(msgChan chan *ckafka.Message) error {
 
 	for {
 		msg, err := consumer.ReadMessage(-1)
-		if err == nil {
-			msgChan <- msg
+		if err != nil {
+			log.Println("failed to read message", err)
+			return err
 		}
+
+		msgChan <- msg
 	}
 }
