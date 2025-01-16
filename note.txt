@@ -1,0 +1,28 @@
+TODO
+
+* Chamar o usecase de update balance ao processa uma mensagem do tópico
+* Buscar uma forma de criar os tópicos na inicialização da aplicação core
+
+Test Data
+{
+    "id": "a245d69a-60b3-46a9-957e-20b981c2b623",
+    "name": "John Doe",
+    "email": "johnd@gmail.com",
+    "created_at": "2025-01-15T02:17:33.358058786Z",
+    "updated_at": "2025-01-15T02:17:33.358058896Z"
+}
+{
+    "id": "c21cfb5c-a830-426a-b976-f77d25b2e2bb"
+}
+
+//
+{
+    "id": "46244fed-16e5-478a-bdc6-e3fc80890553",
+    "name": "Jane Doe",
+    "email": "janed@gmail.com",
+    "created_at": "2025-01-15T02:17:56.071236266Z",
+    "updated_at": "2025-01-15T02:17:56.07123637Z"
+}
+{
+    "id": "f1d40484-063c-4909-b552-edbc9bbb71a2"
+}

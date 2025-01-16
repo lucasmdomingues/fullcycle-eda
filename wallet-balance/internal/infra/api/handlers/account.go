@@ -5,19 +5,19 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/lucasmdomingues/wallet-balance/internal/usecase/account"
+	"github.com/lucasmdomingues/wallet-balance/internal/usecase/balance"
 	"github.com/lucasmdomingues/wallet-balance/pkg/web"
 )
 
-type AccountHandler struct {
-	usecase *account.FindByIDUsecase
+type BalanceHandler struct {
+	usecase *balance.FindByAccountIDUsecase
 }
 
-func NewAccountHandler(usecase *account.FindByIDUsecase) *AccountHandler {
-	return &AccountHandler{usecase}
+func NewBalanceHandler(usecase *balance.FindByAccountIDUsecase) *BalanceHandler {
+	return &BalanceHandler{usecase}
 }
 
-func (h *AccountHandler) FindByID(w http.ResponseWriter, r *http.Request) {
+func (h *BalanceHandler) FindByAccountID(w http.ResponseWriter, r *http.Request) {
 	accountID := chi.URLParam(r, "accountID")
 	if accountID == "" {
 		web.EncodeJSON(w, http.StatusBadRequest, errors.New("account id cannot be empty"))

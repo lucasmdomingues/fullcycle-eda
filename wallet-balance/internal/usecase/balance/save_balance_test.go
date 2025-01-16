@@ -1,4 +1,4 @@
-package account
+package balance
 
 import (
 	"context"
@@ -13,17 +13,17 @@ func TestUpdateBalanceUsecase_Execute(t *testing.T) {
 	uowMock := &uow.UowMock{}
 	uowMock.On("Do", mock.Anything, mock.Anything).Return(nil)
 
-	usecase := NewUpdateBalanceUsecase(uowMock)
+	usecase := NewSaveBalanceUsecase(uowMock)
 	ctx := context.Background()
 
-	input := UpdateBalanceInputDTO{
+	input := SaveBalanceInputDTO{
 		AccountIDFrom:        "5",
 		AccountIDTo:          "3",
 		BalanceAccountIDFrom: 10,
 		BalanceAccountIDTo:   20,
 	}
 
-	err := usecase.UpdateBalance(ctx, input)
+	err := usecase.SaveBalance(ctx, input)
 	require.NoError(t, err)
 
 	uowMock.AssertExpectations(t)

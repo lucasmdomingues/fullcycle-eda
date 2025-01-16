@@ -23,7 +23,7 @@ func NewDatabase(ctx context.Context) (*sql.DB, error) {
 	dbPassword := "root"
 	dbHost := "database"
 	dbPort := "3306"
-	dbSchema := "walletdb"
+	dbSchema := "wallet"
 	dbOptions := strings.Join([]string{"parseTime=true"}, "&")
 
 	log.Println("connect database...")

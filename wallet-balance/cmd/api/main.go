@@ -7,7 +7,8 @@ import (
 
 	"github.com/lucasmdomingues/wallet-balance/internal/infra/api"
 	"github.com/lucasmdomingues/wallet-balance/internal/infra/database"
-	"github.com/lucasmdomingues/wallet-balance/internal/usecase/account"
+	"github.com/lucasmdomingues/wallet-balance/internal/usecase/balance"
+
 	"github.com/lucasmdomingues/wallet-balance/pkg/uow"
 )
 
@@ -20,27 +21,14 @@ func main() {
 	}
 	defer db.Close()
 
-	accountDB := database.NewAccountDB(db)
+	accountDB := database.NewBalanceDB(db)
 
 	uow := uow.NewUow(ctx, db)
-	uow.Register("AccountRepository", func(tx *sql.Tx) interface{} {
+	uow.Register("BalanceRepository", func(tx *sql.Tx) interface{} {
 		return accountDB
 	})
 
-	// balancesConsumer := qm.NewConsumer(&kafka.ConfigMap{
-	// 	"bootstrap.servers": "kafka:29092",
-	// 	"group.id":          "wallet",
-	// }, []string{"wallet.core.balances"})
-
-	// balancesMsgChan := make(chan *kafka.Message)
-	// go func() {
-	// 	err = balancesConsumer.Consume(balancesMsgChan)
-	// 	if err != nil {
-	// 		fmt.Println(err)
-	// 	}
-	// }()
-
-	findAccountByIDUsecase := account.NewFindByIDUsecase(accountDB)
+	findAccountByIDUsecase := balance.NewFindByAccountIDUsecase(accountDB)
 
 	server := api.NewAPI(findAccountByIDUsecase)
 

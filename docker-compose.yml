@@ -3,19 +3,31 @@ version: '3.1'
 services:
   wallet-core:
     build: ./wallet-core
-    container_name: wallet.core
+    container_name: wallet.core.api
     volumes:
       - ./wallet-core:/app
     ports:
       - 8080:8080
+    depends_on:
+      - database
 
   wallet-balance:
     build: ./wallet-balance
-    container_name: wallet.balance
+    container_name: wallet.balance.api
     volumes:
       - ./wallet-balance:/app
     ports:
       - 3003:3003
+    depends_on:
+      - database
+
+  wallet-balance-consumer:
+    build: ./wallet-balance
+    container_name: wallet.balance.consumer
+    volumes:
+      - ./wallet-balance:/app
+    depends_on:
+      - database
 
   database:
     image: mysql:8

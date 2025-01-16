@@ -1,8 +1,6 @@
 package qm
 
 import (
-	"log"
-
 	ckafka "github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
@@ -30,12 +28,7 @@ func (c *Consumer) Consume(msgChan chan *ckafka.Message) error {
 	}
 
 	for {
-		msg, err := consumer.ReadMessage(-1)
-		if err != nil {
-			log.Println("failed to read message", err)
-			return err
-		}
-
+		msg, _ := consumer.ReadMessage(-1)
 		msgChan <- msg
 	}
 }
