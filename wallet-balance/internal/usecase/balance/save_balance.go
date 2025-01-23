@@ -17,7 +17,7 @@ func NewSaveBalanceUsecase(uow uow.UowInterface) *SaveBalanceUsecase {
 	return &SaveBalanceUsecase{uow}
 }
 
-func (usecase *SaveBalanceUsecase) SaveBalance(ctx context.Context, input SaveBalanceInputDTO) error {
+func (usecase *SaveBalanceUsecase) Execute(ctx context.Context, input SaveBalanceInputDTO) error {
 	err := usecase.uow.Do(ctx, func(uow *uow.Uow) error {
 		accountRepository, err := getBalanceRepository(ctx, uow)
 		if err != nil {

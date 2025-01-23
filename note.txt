@@ -1,8 +1,3 @@
-TODO
-
-* Chamar o usecase de update balance ao processa uma mensagem do tópico
-* Buscar uma forma de criar os tópicos na inicialização da aplicação core
-
 Test Data
 {
     "id": "a245d69a-60b3-46a9-957e-20b981c2b623",

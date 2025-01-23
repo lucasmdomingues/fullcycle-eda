@@ -10,6 +10,7 @@ services:
       - 8080:8080
     depends_on:
       - database
+    command: [ "go", "run", "cmd/walletcore/main.go" ]
 
   wallet-balance:
     build: ./wallet-balance
@@ -20,6 +21,7 @@ services:
       - 3003:3003
     depends_on:
       - database
+    entrypoint: [ "go", "run", "cmd/api/main.go" ]
 
   wallet-balance-consumer:
     build: ./wallet-balance
@@ -28,6 +30,7 @@ services:
       - ./wallet-balance:/app
     depends_on:
       - database
+    entrypoint: [ "go", "run", "cmd/consumer/main.go" ]
 
   database:
     image: mysql:8
@@ -36,6 +39,7 @@ services:
     tty: true
     volumes:
       - database:/var/lib/mysql
+      - ./migrations:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
     environment:

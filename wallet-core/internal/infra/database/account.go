@@ -19,7 +19,8 @@ func (a *AccountDB) FindByID(id string) (entity.Account, error) {
 	var account entity.Account
 
 	stmt, err := a.DB.Prepare(`
-		SELECT a.id, a.balance, a.created_at, c.id, c.name, c.email, c.created_at
+		SELECT a.id, a.balance, a.created_at, c.id, c.name, c.email, c.created_at,
+		a.created_at, a.updated_at
 		FROM accounts a
 		INNER JOIN customers c ON a.customer_id = c.id
 		WHERE a.id = ?
@@ -38,6 +39,8 @@ func (a *AccountDB) FindByID(id string) (entity.Account, error) {
 		&account.Customer.Name,
 		&account.Customer.Email,
 		&account.Customer.CreatedAt,
+		&account.CreatedAt,
+		&account.UpdatedAt,
 	)
 	if err != nil {
 		log.Println("failed to execute query", err)

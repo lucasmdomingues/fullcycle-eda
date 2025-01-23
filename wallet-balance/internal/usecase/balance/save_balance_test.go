@@ -23,7 +23,7 @@ func TestUpdateBalanceUsecase_Execute(t *testing.T) {
 		BalanceAccountIDTo:   20,
 	}
 
-	err := usecase.SaveBalance(ctx, input)
+	err := usecase.Execute(ctx, input)
 	require.NoError(t, err)
 
 	uowMock.AssertExpectations(t)
